@@ -1,0 +1,41 @@
+{
+  "name": "career-chatbot",
+  "version": "1.0.0",
+  "description": "AI-powered Career & Internship Chatbot for students and fresh graduates",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "client": "cd frontend && python -m http.server 8000",
+    "server": "node backend/server.js",
+    "build": "echo 'Frontend is static, no build needed'",
+    "test": "echo 'Tests not configured yet'"
+  },
+  "keywords": [
+    "chatbot",
+    "career",
+    "internship",
+    "AI",
+    "gemini",
+    "RAG",
+    "guidance"
+  ],
+  "author": "Husnain Zahid",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "axios": "^1.6.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}
