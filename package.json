@@ -10,7 +10,7 @@
     "dev:client": "npm --prefix frontend run dev",
     "dev:full": "powershell -NoProfile -Command \"Start-Process npm -ArgumentList 'run dev:server'; npm run dev:client\"",
     "start": "node backend/server.js",
-    "build": "npm --prefix frontend run build",
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview",
     "test": "echo 'Tests not configured yet'"
   },
