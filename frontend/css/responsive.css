@@ -1,0 +1,246 @@
+/* Responsive Design */
+
+/* Tablet (768px) */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-2xl) 0;
+    min-height: auto;
+  }
+
+  .hero-image {
+    display: none;
+  }
+
+  .hero-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .nav-menu {
+    gap: var(--spacing-lg);
+  }
+
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chatbot-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    display: none;
+    max-height: 300px;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .message-content {
+    max-width: 85%;
+  }
+
+  .stats .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (480px) */
+@media (max-width: 480px) {
+  :root {
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+    --font-size-4xl: 1.875rem;
+    --font-size-3xl: 1.5rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--bg-primary);
+    gap: 0;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .nav-menu li {
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-menu li:last-child {
+    border: none;
+  }
+
+  .logo {
+    font-size: var(--font-size-lg);
+  }
+
+  .hero-content h1 {
+    font-size: var(--font-size-2xl);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-md);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    padding: var(--spacing-lg);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+  }
+
+  .welcome-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .message-content {
+    max-width: 90%;
+    padding: var(--spacing-md);
+  }
+
+  .suggestion-chips {
+    flex-direction: column;
+  }
+
+  .suggestion-chip {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    gap: var(--spacing-sm);
+  }
+
+  .chat-input {
+    padding: var(--spacing-sm);
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  .voice-btn,
+  .send-btn {
+    padding: var(--spacing-sm);
+    font-size: 1rem;
+  }
+
+  .stats .container {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .cta {
+    padding: var(--spacing-xl);
+  }
+
+  .cta-content h2 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .resources-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .tech-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .sidebar,
+  .chat-input-area,
+  .hamburger {
+    display: none;
+  }
+
+  .chatbot-container {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+/* Dark Mode Media Query */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --border: #475569;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
