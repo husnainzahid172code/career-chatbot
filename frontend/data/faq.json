@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "keywords": ["cv", "resume", "format"],
+    "question": "How should I format my CV/Resume?",
+    "answer": "Use a clean, professional format with clear sections: Contact Info, Professional Summary, Experience, Education, and Skills. Keep it to 1-2 pages, use consistent formatting, bullet points for achievements, and quantify accomplishments."
+  },
+  {
+    "id": 2,
+    "keywords": ["internship", "apply", "application"],
+    "question": "How do I start looking for internships?",
+    "answer": "Check platforms like LinkedIn, Indeed, Internshala, and company career pages. Tailor your resume for each position, write compelling cover letters, and apply 3-6 months in advance. Network with professionals."
+  },
+  {
+    "id": 3,
+    "keywords": ["interview", "prepare", "technical"],
+    "question": "How should I prepare for an interview?",
+    "answer": "Research the company thoroughly, practice common questions using STAR method, prepare achievement examples, and practice with friends. Get good rest, arrive early, maintain eye contact, ask thoughtful questions."
+  },
+  {
+    "id": 4,
+    "keywords": ["linkedin", "profile", "optimize"],
+    "question": "How can I optimize my LinkedIn profile?",
+    "answer": "Use professional headshot, write compelling headline with keywords, detailed summary highlighting skills, add relevant experience with metrics, endorse skills, ask for recommendations, share industry content."
+  },
+  {
+    "id": 5,
+    "keywords": ["skills", "develop", "technical"],
+    "question": "What technical skills are most in-demand?",
+    "answer": "Top skills: Python, JavaScript, Cloud Computing (AWS/Azure), Data Analysis, AI/ML, DevOps, React/Vue, SQL. Also develop soft skills: communication, problem-solving, leadership, teamwork."
+  },
+  {
+    "id": 6,
+    "keywords": ["cover", "letter", "write"],
+    "question": "How do I write an effective cover letter?",
+    "answer": "Personalize for each role, highlight interest and company research, showcase relevant achievements with examples, keep to 3-4 paragraphs, proofread carefully, use professional tone."
+  },
+  {
+    "id": 7,
+    "keywords": ["career", "path", "roadmap"],
+    "question": "How do I plan my career path?",
+    "answer": "Define short-term (1-2 years) and long-term (5-10 years) goals, identify required skills, create action plan with milestones, seek mentorship, network actively, review progress regularly."
+  },
+  {
+    "id": 8,
+    "keywords": ["salary", "negotiate", "compensation"],
+    "question": "How do I negotiate a job offer?",
+    "answer": "Research salary standards using Glassdoor and Payscale, practice your pitch, be confident, ask for time to consider, negotiate salary and benefits. Get everything in writing."
+  },
+  {
+    "id": 9,
+    "keywords": ["soft", "skills", "communication"],
+    "question": "What soft skills should I develop?",
+    "answer": "Key skills: Communication, Critical Thinking, Problem-solving, Teamwork, Leadership, Time Management, Adaptability, Emotional Intelligence. Practice through projects and team collaboration."
+  },
+  {
+    "id": 10,
+    "keywords": ["freshman", "beginner", "first"],
+    "question": "As a freshman, how should I prepare for internships?",
+    "answer": "Build foundation in core subjects, develop basic programming skills, contribute to open-source projects, join tech clubs, attend hackathons, build LinkedIn profile early."
+  },
+  {
+    "id": 11,
+    "keywords": ["github", "portfolio", "projects"],
+    "question": "How do I build an impressive portfolio on GitHub?",
+    "answer": "Create 3-5 meaningful projects, write clear README files, include code comments, contribute to open-source, maintain consistent commit history, showcase diverse technologies."
+  },
+  {
+    "id": 12,
+    "keywords": ["networking", "connect", "professional"],
+    "question": "How do I build professional networks?",
+    "answer": "Attend industry meetups and conferences, join online communities, connect on LinkedIn with personalized messages, contribute to discussions, follow up within a week, offer value."
+  },
+  {
+    "id": 13,
+    "keywords": ["ats", "keywords", "resume"],
+    "question": "What is ATS and how do I optimize for it?",
+    "answer": "ATS is software that filters resumes. Optimize by: using standard formatting, including job keywords, using standard headings, avoiding graphics, using bullet points, saving as PDF or txt."
+  },
+  {
+    "id": 14,
+    "keywords": ["remote", "work", "home"],
+    "question": "How do I find remote internship opportunities?",
+    "answer": "Check We Work Remotely, FlexJobs, Remote.co, LinkedIn filters. Join remote work communities. Check company career pages. Network with remote professionals. Emphasize self-motivation."
+  },
+  {
+    "id": 15,
+    "keywords": ["interview", "questions", "common"],
+    "question": "What are common interview questions?",
+    "answer": "Prepare: Tell about yourself, Why this job, Strengths/weaknesses, Challenge overcome, 5-year goals, Teamwork, Failure learned from. Use STAR method for behavioral questions."
+  },
+  {
+    "id": 16,
+    "keywords": ["first", "day", "new"],
+    "question": "How should I prepare for my first day?",
+    "answer": "Get good sleep, arrive 10-15 minutes early, dress professionally, bring resume copies, bring notebook, charge devices, prepare questions, research company, be enthusiastic."
+  },
+  {
+    "id": 17,
+    "keywords": ["performance", "review", "feedback"],
+    "question": "How should I prepare for a performance review?",
+    "answer": "Gather achievement documentation with metrics, list projects and impact, prepare growth examples, identify improvement areas, set future goals, explain your value."
+  },
+  {
+    "id": 18,
+    "keywords": ["rejection", "handle", "interview"],
+    "question": "How do I handle rejection after interview?",
+    "answer": "Ask for feedback, thank them, stay positive, ask about future applications, analyze improvements, keep applying. Remember rejection is normal and not reflection of worth."
+  },
+  {
+    "id": 19,
+    "keywords": ["communication", "professional", "email"],
+    "question": "What are professional communication practices?",
+    "answer": "Use clear, concise language, proofread before sending, use proper greetings and sign-offs, respond within 24 hours, be respectful and professional, use active voice."
+  },
+  {
+    "id": 20,
+    "keywords": ["internship", "tips", "succeed"],
+    "question": "How can I make the most of my internship?",
+    "answer": "Take initiative finding projects, ask thoughtful questions, seek mentorship, document learning, build relationships, volunteer for challenging work, seek feedback, network widely."
+  },
+  {
+    "id": 21,
+    "keywords": ["freelance", "side", "projects"],
+    "question": "Should I take freelance projects during school?",
+    "answer": "Yes if balanced with studies. Benefits: portfolio, income, experience, time management. Platforms: Upwork, Fiverr, Freelancer, Toptal. Start small, deliver quality work."
+  },
+  {
+    "id": 22,
+    "keywords": ["certifications", "credentials", "training"],
+    "question": "Which certifications are valuable?",
+    "answer": "Tech: AWS, Google Cloud, CompTIA Security+. Data: Google Analytics, IBM Data Science. PM: PMP, CAPM. Research target roles to see what employers value most."
+  },
+  {
+    "id": 23,
+    "keywords": ["mentor", "mentorship", "guidance"],
+    "question": "How do I find and work with a mentor?",
+    "answer": "Identify someone admired in your field, reach out with specific request, be clear about learning goals, respect their time, follow advice and report back, stay in touch."
+  },
+  {
+    "id": 24,
+    "keywords": ["internship", "job", "difference"],
+    "question": "Difference between internship and entry-level job?",
+    "answer": "Internship: temporary (3-6 months), learning-focused, lower pay, no commitment. Job: permanent/contract, responsibility-focused, competitive pay, benefits, career progression."
+  },
+  {
+    "id": 25,
+    "keywords": ["time", "management", "productivity"],
+    "question": "How do I manage time effectively?",
+    "answer": "Use Todoist, Notion, Google Calendar. Prioritize by urgency/importance. Break projects into tasks. Time-block focused work. Set realistic goals. Take breaks. Review weekly."
+  },
+  {
+    "id": 26,
+    "keywords": ["impress", "manager", "stand"],
+    "question": "How can I impress my internship manager?",
+    "answer": "Show initiative solving problems, be reliable meeting deadlines, communicate progress, ask thoughtful questions, go beyond assigned tasks, maintain positive attitude, be team player."
+  },
+  {
+    "id": 27,
+    "keywords": ["switching", "careers", "change"],
+    "question": "How do I transition to different career?",
+    "answer": "Identify why and research field, acquire necessary skills through courses, build portfolio in new field, network with professionals, consider entry-level role, highlight transferable skills."
+  },
+  {
+    "id": 28,
+    "keywords": ["work", "life", "balance"],
+    "question": "How do I avoid burnout?",
+    "answer": "Set clear boundaries, take regular breaks, maintain hobbies, prioritize sleep and exercise, practice saying no, communicate about workload, seek support, use vacation time."
+  },
+  {
+    "id": 29,
+    "keywords": ["startup", "entrepreneurship", "established"],
+    "question": "Startup or established company?",
+    "answer": "Startup: fast-paced, multiple roles, more responsibility, learn quickly. Company: structured, clear processes, benefits, stability. Choose based on learning goals and risk tolerance."
+  },
+  {
+    "id": 30,
+    "keywords": ["ai", "machine", "learning", "data"],
+    "question": "How do I prepare for AI/ML internship?",
+    "answer": "Learn Python and SQL, study statistics and linear algebra, practice on Kaggle, build ML projects with TensorFlow/PyTorch, understand algorithms, read research papers, follow AI blogs."
+  }
+]
