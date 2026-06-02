@@ -1,0 +1,48 @@
+{
+  "name": "career-chatbot",
+  "version": "1.0.0",
+  "description": "AI-powered Career & Internship Chatbot for students and fresh graduates",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev:server",
+    "dev:server": "node --watch backend/server.js",
+    "dev:client": "npm --prefix frontend run dev",
+    "dev:full": "powershell -NoProfile -Command \"Start-Process npm -ArgumentList 'run dev:server'; npm run dev:client\"",
+    "start": "node backend/server.js",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview",
+    "test": "echo 'Tests not configured yet'"
+  },
+  "keywords": [
+    "chatbot",
+    "career",
+    "internship",
+    "AI",
+    "gemini",
+    "RAG",
+    "guidance"
+  ],
+  "author": "Husnain Zahid",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.2",
+    "google-auth-library": "^10.6.2",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.12.0",
+    "mongodb-memory-server-core": "^11.2.0",
+    "mongoose": "^9.6.3",
+    "morgan": "^1.10.1",
+    "multer": "^2.1.1",
+    "pdf-parse": "^2.4.5"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  }
+}

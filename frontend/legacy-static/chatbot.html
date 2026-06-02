@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Chatbot | AI Career Assistant</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">CareerBot AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chatbot.html" class="active">Chatbot</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><button class="theme-toggle" id="themeToggle">🌙</button></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="chatbot-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>New Chat</h3>
+                <button class="new-chat-btn" id="newChatBtn" title="Start new conversation">✏️ New Chat</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Quick Prompts</h4>
+                <div class="quick-prompts">
+                    <button class="quick-prompt" data-prompt="How can I improve my CV?">📄 CV Tips</button>
+                    <button class="quick-prompt" data-prompt="What skills do I need for software engineering internship?">💼 Internship Prep</button>
+                    <button class="quick-prompt" data-prompt="What's a good roadmap for becoming a frontend developer?">🚀 Dev Roadmap</button>
+                    <button class="quick-prompt" data-prompt="How do I prepare for a technical interview?">🎯 Interview Tips</button>
+                    <button class="quick-prompt" data-prompt="How can I optimize my LinkedIn profile?">🌐 LinkedIn Guide</button>
+                    <button class="quick-prompt" data-prompt="What soft skills are employers looking for?">🤝 Soft Skills</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Chat History</h4>
+                <div class="chat-history" id="chatHistory"></div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="sidebar-btn" id="clearChatBtn" title="Clear all chats">🗑️ Clear All</button>
+                <button class="sidebar-btn" id="exportChatBtn" title="Export chat">📥 Export</button>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <!-- Welcome Screen -->
+            <div class="chat-welcome" id="chatWelcome">
+                <div class="welcome-content">
+                    <div class="welcome-emoji">🎓</div>
+                    <h2>Welcome to CareerBot AI</h2>
+                    <p>Your personal AI career guidance assistant</p>
+                    <div class="welcome-cards">
+                        <div class="welcome-card">
+                            <span class="card-icon">💬</span>
+                            <h4>Ask Anything</h4>
+                            <p>Career guidance, internship tips, interview prep, and more</p>
+                        </div>
+                        <div class="welcome-card">
+                            <span class="card-icon">🧠</span>
+                            <h4>AI Powered</h4>
+                            <p>Powered by Google Gemini for intelligent responses</p>
+                        </div>
+                        <div class="welcome-card">
+                            <span class="card-icon">🎯</span>
+                            <h4>Personalized</h4>
+                            <p>Get tailored advice based on your specific situation</p>
+                        </div>
+                    </div>
+                    <div class="suggested-questions">
+                        <p>Try asking:</p>
+                        <div class="suggestion-chips">
+                            <button class="suggestion-chip" data-prompt="How should I start my career?">How should I start my career?</button>
+                            <button class="suggestion-chip" data-prompt="What are the top skills for 2026?">What are top skills for 2026?</button>
+                            <button class="suggestion-chip" data-prompt="How to prepare for internship interview?">Internship interview prep?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer"></div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="userInput" class="chat-input" placeholder="Ask me about careers, internships, interviews..." autocomplete="off">
+                    <button class="voice-btn" id="voiceBtn" title="Voice input">🎤</button>
+                    <button class="send-btn" id="sendBtn" title="Send message">➤</button>
+                </div>
+                <p class="input-hint">Press Enter or click send. Tip: Use natural language questions.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="loading-modal" id="loadingModal" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Thinking...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/rag-engine.js"></script>
+    <script src="js/api-handler.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
