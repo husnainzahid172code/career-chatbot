@@ -475,11 +475,36 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+// ─── AI Chat mock (local dev fallback) ──────────────────────────
+
+const AI_CHAT_MOCK_RESPONSES = [
+  (p: string) => `Great question about "${p.substring(0, 60)}". Here's my advice:\n\n1. **Research the field** — Stay updated with the latest trends.\n2. **Build relevant skills** — Focus on both technical and soft skills.\n3. **Network actively** — Connect with professionals and attend events.\n4. **Gain practical experience** — Work on projects or internships.\n5. **Prepare your applications** — Tailor your resume for each opportunity.`,
+  (p: string) => `Here's my recommendation for "${p.substring(0, 60)}":\n\n### Key Steps\n- Identify your strengths and areas for improvement\n- Set clear, achievable goals\n- Create a structured learning plan\n- Seek mentorship\n- Practice regularly\n\n### Resources\n- Online courses (Coursera, Udemy, edX)\n- Industry blogs and forums\n- Career counseling services\n\nLet me know if you need more specific guidance!`,
+  (p: string) => `That's an excellent topic. Here's a structured approach:\n\n## Overview\nUnderstanding "${p.substring(0, 60)}" is crucial for career growth.\n\n## Action Plan\n1. **Week 1-2:** Research and gather resources\n2. **Week 3-4:** Start hands-on practice\n3. **Week 5-6:** Build a portfolio project\n4. **Week 7-8:** Apply and iterate\n\n## Pro Tips\n- Consistency matters more than intensity\n- Don't be afraid to make mistakes\n- Celebrate small wins along the way`,
+];
+
+function handleMockAiChat(config: any) {
+  const body = config.data ? (typeof config.data === "string" ? JSON.parse(config.data) : config.data) : {};
+  const prompt = body.prompt || "";
+  const idx = prompt.length % AI_CHAT_MOCK_RESPONSES.length;
+  const text = AI_CHAT_MOCK_RESPONSES[idx](prompt);
+  return mockResponse({ text });
+}
+
 // Mock adapter — intercepts ALL routes and handles locally
 api.interceptors.request.use(async (config) => {
-  // Passthrough: let AI chat routes reach the real backend / Vercel serverless function
-  if (config.url === "/ai/chat" || config.url === "/ai/chat/stream") {
+  // In production (Vercel), let AI chat routes reach the real serverless function
+  if (import.meta.env.PROD && (config.url === "/ai/chat" || config.url === "/ai/chat/stream")) {
     return config;
+  }
+  // In development, if VITE_API_BASE_URL is explicitly set, passthrough to real backend
+  if (import.meta.env.DEV && import.meta.env.VITE_API_BASE_URL && (config.url === "/ai/chat" || config.url === "/ai/chat/stream")) {
+    return config;
+  }
+  // Otherwise, mock /ai/chat locally (no backend running)
+  if (config.url === "/ai/chat" || config.url === "/ai/chat/stream") {
+    const response = handleMockAiChat(config);
+    throw response;
   }
   if (config.url?.startsWith("/auth/")) {
     const response = await handleMockAuth(config);
