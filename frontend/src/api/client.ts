@@ -266,6 +266,23 @@ async function handleMockData(config: any): Promise<AxiosResponse> {
     }
   }
 
+  // ── Job Matcher ──
+  if (method === "get" && url === "/matcher/jobs") {
+    return mockResponse({ jobs: getSampleJobs() });
+  }
+
+  if (method === "post" && url === "/matcher/match") {
+    const { resumeText = "" } = body;
+    const { resumeSkills, results } = runJobMatch(resumeText);
+    return mockResponse({ resumeSkills, matches: results });
+  }
+
+  if (method === "post" && url === "/matcher/extract-skills") {
+    const { text = "" } = body;
+    const skills = extractSkillsFromText(text);
+    return mockResponse({ skills });
+  }
+
   // ── Generic catch for any REST-like pattern (count endpoints) ──
   // Handle /ai/chats?limit=1 style requests for overview counts
   if (method === "get") {
@@ -402,6 +419,58 @@ function generateInternshipResponse(goal: string): string {
     `  ☐ Apply to at least 3 internships per week`,
   ].join("\n");
   return sections;
+}
+
+// ─── Job Matcher helpers ────────────────────────────────────────
+
+const SKILL_DB = [
+  "javascript", "typescript", "python", "java", "c++", "c#", "ruby", "go", "rust", "swift",
+  "react", "angular", "vue", "node.js", "express", "django", "flask", "spring", "laravel",
+  "sql", "mongodb", "postgresql", "mysql", "redis", "elasticsearch",
+  "aws", "azure", "gcp", "docker", "kubernetes", "terraform", "ci/cd", "jenkins",
+  "machine learning", "deep learning", "nlp", "computer vision", "tensorflow", "pytorch",
+  "data analysis", "data visualization", "pandas", "numpy", "scikit-learn", "tableau", "power bi",
+  "git", "linux", "rest api", "graphql", "microservices", "agile", "scrum",
+  "html", "css", "sass", "tailwind", "bootstrap", "webpack", "vite",
+  "jest", "mocha", "cypress", "selenium", "junit", "pytest",
+  "figma", "adobe xd", "photoshop", "illustrator",
+  "project management", "product management", "leadership", "communication", "teamwork"
+];
+
+const SAMPLE_JOBS = [
+  { title: "Frontend Developer", company: "TechCorp", description: "Build and maintain modern web applications using React, TypeScript, and Tailwind CSS.", requiredSkills: ["react", "typescript", "html", "css", "javascript", "git", "rest api"] },
+  { title: "Backend Engineer", company: "DataFlow Inc", description: "Design and implement scalable REST APIs and microservices with Node.js, Express, PostgreSQL.", requiredSkills: ["node.js", "express", "sql", "postgresql", "docker", "rest api", "git"] },
+  { title: "Full Stack Developer", company: "StartupLab", description: "End-to-end SaaS development. React frontend, Node.js backend, MongoDB, AWS.", requiredSkills: ["react", "node.js", "mongodb", "aws", "javascript", "git", "rest api"] },
+  { title: "Data Scientist", company: "InsightAI", description: "Apply ML to business problems. Build predictive models, analyze datasets, deploy pipelines.", requiredSkills: ["python", "machine learning", "data analysis", "pandas", "numpy", "scikit-learn", "sql"] },
+  { title: "ML Engineer", company: "NeuralTech", description: "Design and deploy production ML systems. Deep learning, NLP, model optimization, MLOps.", requiredSkills: ["python", "machine learning", "deep learning", "tensorflow", "pytorch", "docker", "kubernetes"] },
+  { title: "DevOps Engineer", company: "CloudScale", description: "Manage cloud infra, CI/CD pipelines, container orchestration, automated deployment.", requiredSkills: ["aws", "docker", "kubernetes", "jenkins", "linux", "terraform", "ci/cd"] },
+  { title: "Data Analyst", company: "MarketPulse", description: "Analyze business data for insights. Create dashboards, reports, visualizations.", requiredSkills: ["sql", "python", "data analysis", "data visualization", "tableau", "excel", "pandas"] },
+  { title: "Product Manager", company: "InnovateCo", description: "Define product vision, roadmap, strategy. Work with engineering, design, marketing.", requiredSkills: ["project management", "product management", "leadership", "communication", "agile", "scrum"] },
+  { title: "UI/UX Designer", company: "DesignStudio", description: "Create intuitive interfaces and experiences. Wireframing, prototyping, user research.", requiredSkills: ["figma", "adobe xd", "photoshop", "illustrator", "html", "css"] },
+  { title: "Mobile Developer", company: "AppWorks", description: "Cross-platform mobile apps with React Native. Backend API integration, app store deployment.", requiredSkills: ["react", "javascript", "typescript", "rest api", "git", "css", "html"] },
+];
+
+function getSampleJobs() { return SAMPLE_JOBS.map((j, i) => ({ ...j, id: i })); }
+
+function extractSkillsFromText(text: string): string[] {
+  const norm = text.toLowerCase().replace(/[^a-z0-9\s+#.]/g, " ").replace(/\s+/g, " ").trim();
+  const found = SKILL_DB.filter((skill) => {
+    const pattern = skill.replace(/[.+]/g, "\\$&");
+    return new RegExp(`\\b${pattern}\\b`, "i").test(norm);
+  });
+  return [...new Set(found)];
+}
+
+function runJobMatch(resumeText: string) {
+  const resumeSkills = extractSkillsFromText(resumeText);
+  const results = SAMPLE_JOBS.map((job, index) => {
+    const matched = job.requiredSkills.filter((s) => resumeSkills.some((rs) => rs.toLowerCase() === s.toLowerCase()));
+    const missing = job.requiredSkills.filter((s) => !resumeSkills.some((rs) => rs.toLowerCase() === s.toLowerCase()));
+    const score = job.requiredSkills.length > 0 ? Math.round((matched.length / job.requiredSkills.length) * 100) : 0;
+    return { jobIndex: index, job, score, matchedSkills: matched, missingSkills: missing };
+  });
+  results.sort((a, b) => b.score - a.score);
+  return { resumeSkills, results };
 }
 
 // ─── Axios instance ─────────────────────────────────────────────

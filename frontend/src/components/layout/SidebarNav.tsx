@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FiBarChart2, FiHome, FiMessageCircle, FiUpload, FiUser, FiShield, FiBriefcase, FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
+import { FiBarChart2, FiHome, FiMessageCircle, FiUpload, FiUser, FiShield, FiBriefcase, FiMenu, FiX, FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
 
 const items = [
@@ -8,6 +8,7 @@ const items = [
   { to: "/dashboard/upload", label: "Resume Analyzer", icon: FiUpload },
   { to: "/dashboard/roadmap", label: "Roadmap", icon: FiBarChart2 },
   { to: "/dashboard/internship", label: "Internship", icon: FiBriefcase },
+  { to: "/dashboard/matcher", label: "Job Matcher", icon: FiSearch },
   { to: "/dashboard/profile", label: "Profile", icon: FiUser },
   { to: "/dashboard/admin", label: "Admin", icon: FiShield },
 ];

@@ -9,6 +9,7 @@ import aiRoutes from "./routes/ai.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import favoritesRoutes from "./routes/favorites.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import jobMatcherRoutes from "./routes/jobMatcher.routes.js";
 import { simpleRateLimit } from "./middleware/rateLimit.js";
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use("/api/ai", aiRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/matcher", jobMatcherRoutes);
 
 app.use((err, _req, res, _next) => {
   console.error(err);

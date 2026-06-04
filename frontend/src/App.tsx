@@ -12,6 +12,7 @@ const RoadmapPage = lazy(() => import("./pages/dashboard/RoadmapPage"));
 const ProfilePage = lazy(() => import("./pages/dashboard/ProfilePage"));
 const AdminPage = lazy(() => import("./pages/dashboard/AdminPage"));
 const InternshipPage = lazy(() => import("./pages/dashboard/InternshipPage"));
+const JobMatcherPage = lazy(() => import("./pages/dashboard/JobMatcherPage"));
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="upload" element={<UploadPage />} />
             <Route path="roadmap" element={<RoadmapPage />} />
             <Route path="internship" element={<InternshipPage />} />
+            <Route path="matcher" element={<JobMatcherPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="admin" element={<AdminPage />} />
           </Route>
