@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || "/api";
 const USERS_KEY = "careerpilot.users";
 const REPORTS_KEY = "careerpilot.reports";
 const ROADMAPS_KEY = "careerpilot.roadmaps";
@@ -219,18 +219,6 @@ async function handleMockData(config: any): Promise<AxiosResponse> {
     reports.unshift(analysis);
     setStore(REPORTS_KEY, reports);
     return mockResponse(analysis);
-  }
-
-  // ── AI Chat (proxy endpoint) ──
-  if (method === "post" && url === "/ai/chat") {
-    const { prompt = "" } = body;
-    const responses = [
-      `Great question about "${prompt.substring(0, 60)}". Here's my advice:\n\n1. **Research the field** — Stay updated with the latest trends and technologies.\n2. **Build relevant skills** — Focus on both technical and soft skills.\n3. **Network actively** — Connect with professionals on LinkedIn and attend industry events.\n4. **Gain practical experience** — Work on projects, internships, or open-source contributions.\n5. **Prepare your applications** — Tailor your resume and cover letter for each opportunity.\n\nWould you like me to elaborate on any of these points?`,
-      `Here's what I recommend for "${prompt.substring(0, 60)}":\n\n### Key Steps\n- Start by identifying your strengths and areas for improvement\n- Set clear, achievable short-term and long-term goals\n- Create a structured learning plan with milestones\n- Seek mentorship from experienced professionals\n- Practice regularly and track your progress\n\n### Resources\n- Online courses (Coursera, Udemy, edX)\n- Industry blogs and publications\n- Professional communities and forums\n- Career counseling services\n\nLet me know if you need more specific guidance!`,
-      `That's an excellent topic. Here's a structured approach:\n\n## Overview\nUnderstanding "${prompt.substring(0, 60)}" is crucial for career growth.\n\n## Action Plan\n1. **Week 1-2:** Research and gather resources\n2. **Week 3-4:** Start hands-on practice\n3. **Week 5-6:** Build a portfolio project\n4. **Week 7-8:** Apply and iterate\n\n## Pro Tips\n- Consistency matters more than intensity\n- Don't be afraid to make mistakes — they're learning opportunities\n- Find a study group or accountability partner\n- Celebrate small wins along the way\n\nWhat aspect would you like to explore further?`
-    ];
-    const idx = prompt.length % responses.length;
-    return mockResponse({ text: responses[idx], chatId: nextId(), messageId: nextId() });
   }
 
   // ── Roadmaps ──
@@ -489,6 +477,10 @@ api.interceptors.request.use(async (config) => {
 
 // Mock adapter — intercepts ALL routes and handles locally
 api.interceptors.request.use(async (config) => {
+  // Passthrough: let AI chat routes reach the real backend / Vercel serverless function
+  if (config.url === "/ai/chat" || config.url === "/ai/chat/stream") {
+    return config;
+  }
   if (config.url?.startsWith("/auth/")) {
     const response = await handleMockAuth(config);
     throw response;
