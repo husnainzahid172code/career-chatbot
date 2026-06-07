@@ -150,10 +150,7 @@ NODE_ENV=development
 ## 🚀 Deployment
 
 ### Vercel
-```bash
-npm install -g vercel
-vercel
-```
+
 
 ### Netlify
 - Connect GitHub repo
@@ -171,22 +168,8 @@ vercel
 - Soft skills
 - Technical roadmaps
 
-## 🐛 Troubleshooting
-
-**API Key Error**: Check `.env` file
-**CORS Error**: Use backend server or proxy
-**Chat Not Responding**: Check internet and API quota
-**FAQ Not Matching**: Add more keywords to FAQ entries
-
-## 📄 License
-
-MIT License - Open source and free to use
 
 ## 👨‍💻 Created by
 
 **Husnain Zahid** - @husnainzahid172code
 
----
-**Status**: Production Ready ✅
-**Version**: 1.0.0
-**Last Updated**: June 2026
