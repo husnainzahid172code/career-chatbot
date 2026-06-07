@@ -14,23 +14,21 @@ export default function LandingPage() {
   const { token } = useAuth();
 
   return (
-    <div className="min-h-dvh bg-page text-primary transition-colors duration-300">
+    <div className="min-h-dvh bg-page text-primary">
       <div className="mx-auto max-w-6xl px-6 py-6">
         <header className="flex items-center justify-between">
-          <div className="rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 p-[1px]">
-            <div className="rounded-xl bg-page px-4 py-2">
-              <h1 className="text-lg font-bold text-primary">CareerPilot AI</h1>
-            </div>
+          <div>
+            <h1 className="text-lg font-bold text-primary">CareerPilot AI</h1>
           </div>
           <div className="flex items-center gap-3">
             {token ? (
-              <Link to="/dashboard" className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-white hover:opacity-90 transition">
+              <Link to="/dashboard" className="flex items-center gap-2 rounded-xl bg-btn px-5 py-2 text-sm font-semibold text-btn hover:bg-btn-hover transition">
                 Dashboard <FiArrowRight />
               </Link>
             ) : (
               <>
-                <Link to="/login" className="rounded-xl px-4 py-2 text-sm text-secondary hover:text-primary transition">Sign in</Link>
-                <Link to="/signup" className="rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-5 py-2 text-sm font-semibold text-white hover:opacity-90 transition">Get Started</Link>
+                <Link to="/login" className="rounded-xl px-4 py-2 text-sm text-muted hover:text-primary transition">Sign in</Link>
+                <Link to="/signup" className="rounded-xl bg-btn px-5 py-2 text-sm font-semibold text-btn hover:bg-btn-hover transition">Get Started</Link>
               </>
             )}
           </div>
@@ -40,24 +38,24 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mt-16 rounded-3xl border border-subtle bg-gradient-to-br from-indigo-500/10 via-fuchsia-500/5 to-transparent p-10 backdrop-blur-xl text-center"
+          className="mt-16 rounded-3xl border border-default bg-card p-10 text-center"
         >
           <div className="mx-auto max-w-3xl">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500">
-              <FiStar className="text-xl text-white" />
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-btn">
+              <FiStar className="text-xl text-btn" />
             </div>
-            <h2 className="text-4xl font-extrabold leading-tight md:text-5xl">
+            <h2 className="text-4xl font-extrabold leading-tight md:text-5xl text-primary">
               AI-Powered Career Growth for{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">Students & Job Seekers</span>
+              <span className="text-secondary">Students & Job Seekers</span>
             </h2>
             <p className="mt-4 text-lg text-secondary">
               Chat guidance, resume analysis, interview prep, internship support, and personalized roadmaps — all in one modern SaaS workspace.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link to="/signup" className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition">
+              <Link to="/signup" className="flex items-center gap-2 rounded-xl bg-btn px-6 py-3 text-sm font-semibold text-btn hover:bg-btn-hover transition">
                 Get Started Free <FiArrowRight />
               </Link>
-              <Link to="/dashboard" className="rounded-xl border border-default px-6 py-3 text-sm text-secondary hover:bg-card transition">
+              <Link to="/dashboard" className="rounded-xl border border-default px-6 py-3 text-sm text-muted hover:bg-elevated transition">
                 Open Dashboard
               </Link>
             </div>
@@ -65,8 +63,8 @@ export default function LandingPage() {
         </motion.section>
 
         <section className="mt-20">
-          <h3 className="text-center text-2xl font-bold">Everything you need for your career journey</h3>
-          <p className="mt-2 text-center text-sm text-muted">AI-powered tools to help you land your dream role</p>
+          <h3 className="text-center text-2xl font-bold text-primary">Everything you need for your career journey</h3>
+          <p className="mt-2 text-center text-sm text-disabled">AI-powered tools to help you land your dream role</p>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {features.map(({ icon: Icon, title, desc }, i) => (
               <motion.div
@@ -74,12 +72,12 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * i, duration: 0.5 }}
-                className="group rounded-2xl border border-subtle bg-card p-6 hover:border-default hover:bg-card-hover transition-all"
+                className="group rounded-2xl border border-default bg-card p-6 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/20 group-hover:bg-indigo-500/30 transition">
-                  <Icon className="text-indigo-400" />
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-elevated transition">
+                  <Icon className="text-secondary" />
                 </div>
-                <h4 className="font-semibold">{title}</h4>
+                <h4 className="font-semibold text-primary">{title}</h4>
                 <p className="mt-1.5 text-sm text-muted">{desc}</p>
               </motion.div>
             ))}

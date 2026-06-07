@@ -2,17 +2,28 @@ import { useEffect, useState } from "react";
 import { api } from "../../api/client";
 import { Link } from "react-router-dom";
 import { FiMessageCircle, FiUpload, FiBarChart2, FiHeart, FiArrowRight } from "react-icons/fi";
+import SearchBar from "../../components/ui/SearchBar";
+import ActivePathWidget from "../../components/ui/ActivePathWidget";
+import StatCard from "../../components/ui/StatCard";
+import OpportunityCard from "../../components/ui/OpportunityCard";
 
-const cards = [
-  { label: "Chats", key: "chats", icon: FiMessageCircle, color: "from-indigo-500/20 to-indigo-600/10", link: "/dashboard/chat" },
-  { label: "Resumes Analyzed", key: "reports", icon: FiUpload, color: "from-emerald-500/20 to-emerald-600/10", link: "/dashboard/upload" },
-  { label: "Roadmaps Generated", key: "roadmaps", icon: FiBarChart2, color: "from-amber-500/20 to-amber-600/10", link: "/dashboard/roadmap" },
-  { label: "Favorites", key: "favorites", icon: FiHeart, color: "from-rose-500/20 to-rose-600/10", link: "/dashboard/internship" },
+const statCards = [
+  { label: "Chats", key: "chats", icon: FiMessageCircle, link: "/dashboard/chat", accent: "accent-indigo" },
+  { label: "Resumes Analyzed", key: "reports", icon: FiUpload, link: "/dashboard/upload", accent: "accent-emerald" },
+  { label: "Roadmaps Generated", key: "roadmaps", icon: FiBarChart2, link: "/dashboard/roadmap", accent: "accent-amber" },
+  { label: "Favorites", key: "favorites", icon: FiHeart, link: "/dashboard/internship", accent: "accent-rose" },
+];
+
+const opportunities = [
+  { title: "Software Engineering Intern", company: "Google", location: "Remote", salary: "$50/hr", skills: ["React", "Python", "SQL"], matchScore: 78, type: "internship" as const },
+  { title: "Frontend Developer", company: "Stripe", location: "San Francisco, CA", salary: "$120k/yr", skills: ["TypeScript", "React", "Next.js"], matchScore: 85, type: "job" as const },
+  { title: "Data Science Bootcamp", company: "DataCamp", location: "Online", salary: "Free", skills: ["Python", "ML", "Statistics"], matchScore: 62, type: "skill" as const },
 ];
 
 export default function OverviewPage() {
   const [stats, setStats] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -26,68 +37,41 @@ export default function OverviewPage() {
   }, []);
 
   return (
-    <div>
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">Dashboard</h2>
-        <p className="mt-1 text-sm text-muted">Welcome back to CareerPilot AI</p>
+    <div className="max-w-6xl mx-auto space-y-6">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-badge/10 via-sage/5 to-warning/5 p-6">
+        <div className="relative z-10">
+          <h2 className="text-2xl font-bold text-primary">Dashboard</h2>
+          <p className="mt-1 text-sm text-muted">Welcome back to CareerPilot AI</p>
+        </div>
+        <div className="absolute inset-y-0 right-0 w-64 bg-gradient-to-l from-indigo-200/10 to-transparent dark:from-indigo-500/5" />
+      </div>
+
+      <SearchBar value={search} onChange={setSearch} />
+
+      <div className="relative">
+        <div className="absolute left-0 top-0 h-full w-0.5 rounded-full bg-gradient-to-b from-indigo-400 via-emerald-400 to-amber-400 opacity-40" />
+        <ActivePathWidget />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {cards.map(({ label, key, icon: Icon, color, link }) => (
-          <Link to={link} key={key} className={`group rounded-2xl border border-subtle bg-gradient-to-br ${color} p-5 backdrop-blur-xl hover:border-default transition-all`}>
-            <div className="flex items-center justify-between">
-              <div className="rounded-xl bg-elevated p-2.5">
-                <Icon className="text-lg text-secondary" />
-              </div>
-              <FiArrowRight className="text-disabled opacity-0 group-hover:opacity-100 transition-opacity" />
-            </div>
-            <p className="mt-4 text-xs font-medium uppercase tracking-wider text-muted">{label}</p>
-            {loading ? (
-              <div className="mt-2 h-8 w-20 animate-pulse rounded bg-elevated" />
-            ) : (
-              <p className="mt-1 text-3xl font-bold">{stats[key] ?? 0}</p>
-            )}
-          </Link>
+        {statCards.map(({ label, key, icon, link, accent }) => (
+          <StatCard key={key} label={label} value={stats[key] ?? 0} icon={icon} link={link} loading={loading} accent={accent} />
         ))}
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        <div className="rounded-2xl border border-subtle bg-card p-5 transition-colors duration-300">
-          <h3 className="text-lg font-semibold">Quick Actions</h3>
-          <div className="mt-4 space-y-3">
-            {[
-              { label: "Start a Career Chat", desc: "Ask AI about jobs, skills, or interviews", to: "/dashboard/chat", icon: FiMessageCircle },
-              { label: "Upload Your Resume", desc: "Get ATS score and improvement suggestions", to: "/dashboard/upload", icon: FiUpload },
-              { label: "Generate a Roadmap", desc: "Personalized career pathway plan", to: "/dashboard/roadmap", icon: FiBarChart2 },
-              { label: "Prepare for Internships", desc: "Cover letters, interview questions & more", to: "/dashboard/internship", icon: FiHeart },
-            ].map(({ label, desc, to, icon: Icon }) => (
-              <Link to={to} key={label} className="flex items-center gap-3 rounded-xl bg-card p-3 hover:bg-card-hover transition">
-                <div className="rounded-lg bg-indigo-500/20 p-2"><Icon className="text-indigo-400" /></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">{label}</p>
-                  <p className="text-xs text-muted">{desc}</p>
-                </div>
-                <FiArrowRight className="text-disabled" />
-              </Link>
-            ))}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="h-5 w-1 rounded-full bg-gradient-to-b from-badge to-sage" />
+            <h3 className="font-semibold text-primary">Recommended Opportunities</h3>
+            <span className="rounded-full bg-badge px-2 py-0.5 text-[10px] font-medium text-badge">{opportunities.length} new</span>
           </div>
+          <Link to="/dashboard/matcher" className="flex items-center gap-1 text-xs font-medium text-badge hover:text-badge transition">View all <FiArrowRight className="text-[10px]" /></Link>
         </div>
-
-        <div className="rounded-2xl border border-subtle bg-card p-5 transition-colors duration-300">
-          <h3 className="text-lg font-semibold">Tips & Resources</h3>
-          <div className="mt-4 space-y-3">
-            {[
-              { title: "Tailor your resume", desc: "Customize your resume for each job application to increase ATS score." },
-              { title: "Practice interviews", desc: "Use the Internship Assistant to prepare for common interview questions." },
-              { title: "Build your network", desc: "Connect with professionals on LinkedIn in your target industry." },
-              { title: "Stay consistent", desc: "Set aside 30 minutes daily for skill development and applications." },
-            ].map(({ title, desc }) => (
-              <div key={title} className="rounded-xl border border-muted bg-card p-3">
-                <p className="text-sm font-medium">{title}</p>
-                <p className="mt-1 text-xs text-muted">{desc}</p>
-              </div>
-            ))}
-          </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {opportunities.map((opp) => (
+            <OpportunityCard key={opp.title} {...opp} />
+          ))}
         </div>
       </div>
     </div>

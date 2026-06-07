@@ -3,12 +3,12 @@ import { api } from "../../api/client";
 import { FiShield, FiUsers, FiMessageCircle, FiUpload, FiBarChart2, FiRefreshCw } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 
-const cardMeta: Record<string, { label: string; icon: any; color: string }> = {
-  users: { label: "Total Users", icon: FiUsers, color: "from-indigo-500/20 to-indigo-600/10" },
-  chats: { label: "Total Chats", icon: FiMessageCircle, color: "from-emerald-500/20 to-emerald-600/10" },
-  messages: { label: "Total Messages", icon: FiMessageCircle, color: "from-cyan-500/20 to-cyan-600/10" },
-  reports: { label: "Resume Reports", icon: FiUpload, color: "from-amber-500/20 to-amber-600/10" },
-  roadmaps: { label: "Roadmaps", icon: FiBarChart2, color: "from-rose-500/20 to-rose-600/10" },
+const cardMeta: Record<string, { label: string; icon: any }> = {
+  users: { label: "Total Users", icon: FiUsers },
+  chats: { label: "Total Chats", icon: FiMessageCircle },
+  messages: { label: "Total Messages", icon: FiMessageCircle },
+  reports: { label: "Resume Reports", icon: FiUpload },
+  roadmaps: { label: "Roadmaps", icon: FiBarChart2 },
 };
 
 export default function AdminPage() {
@@ -34,8 +34,8 @@ export default function AdminPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <FiShield className="text-5xl text-disabled" />
-        <h2 className="mt-4 text-2xl font-bold">Admin Access Required</h2>
-        <p className="mt-2 text-sm text-muted">You need admin privileges to view this page.</p>
+        <h2 className="mt-4 text-2xl font-bold text-primary">Admin Access Required</h2>
+        <p className="mt-2 text-sm text-disabled">You need admin privileges to view this page.</p>
       </div>
     );
   }
@@ -43,28 +43,28 @@ export default function AdminPage() {
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Admin Analytics</h2>
+        <h2 className="text-2xl font-bold text-primary">Admin Analytics</h2>
         <p className="mt-1 text-sm text-muted">Platform overview and usage statistics</p>
       </div>
 
       <button onClick={loadAnalytics} disabled={loading}
-        className="mb-6 flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-40"
+        className="mb-6 flex items-center gap-2 rounded-xl bg-btn px-5 py-2.5 text-sm font-semibold text-btn hover:bg-btn-hover transition disabled:opacity-40"
       >
         <FiRefreshCw className={loading ? "animate-spin" : ""} /> {loading ? "Loading..." : "Refresh Analytics"}
       </button>
 
-      {error && <div className="mb-4 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">{error}</div>}
+      {error && <div className="mb-4 rounded-xl border border-danger bg-danger p-3 text-sm text-danger">{error}</div>}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards && Object.entries(cards).map(([key, value]) => {
-          const meta = cardMeta[key] || { label: key, icon: FiBarChart2, color: "from-white/5 to-white/0" };
+          const meta = cardMeta[key] || { label: key, icon: FiBarChart2 };
           const Icon = meta.icon;
           return (
-            <div key={key} className={`rounded-2xl border border-subtle bg-gradient-to-br ${meta.color} p-5 backdrop-blur-xl transition-colors duration-300`}>
+            <div key={key} className="rounded-2xl border border-default bg-card p-5">
               <div className="flex items-center justify-between">
-                <div className="rounded-xl bg-elevated p-2.5"><Icon className="text-secondary" /></div>
+                <div className="rounded-xl bg-elevated p-2.5"><Icon className="text-muted" /></div>
               </div>
-              <p className="mt-4 text-3xl font-bold">{value}</p>
+              <p className="mt-4 text-3xl font-bold text-primary">{value}</p>
               <p className="mt-1 text-xs font-medium uppercase tracking-wider text-muted">{meta.label}</p>
             </div>
           );

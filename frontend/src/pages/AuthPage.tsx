@@ -44,25 +44,25 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="grid min-h-dvh place-items-center bg-page p-6 text-primary transition-colors duration-300">
+    <div className="grid min-h-dvh place-items-center bg-page p-6">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex items-center justify-center">
             <Logo size={48} />
           </div>
-          <h2 className="mt-2 text-2xl font-bold">{mode === "signup" ? "Create your account" : "Welcome back"}</h2>
-          <p className="mt-1 text-sm text-secondary">
+          <h2 className="mt-2 text-2xl font-bold text-primary">{mode === "signup" ? "Create your account" : "Welcome back"}</h2>
+          <p className="mt-1 text-sm text-muted">
             {mode === "signup" ? "Start your career journey with AI-powered guidance" : "Sign in to continue your career journey"}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="rounded-2xl border border-subtle bg-card p-6 backdrop-blur-xl transition-colors duration-300">
+        <form onSubmit={handleSubmit} className="rounded-2xl border border-default bg-card p-6">
           {mode === "signup" && (
             <div className="mb-4">
               <label className="text-xs font-medium uppercase tracking-wider text-muted">Full Name</label>
               <div className="relative mt-1.5">
-                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-                <input className="w-full rounded-xl border border-subtle bg-input py-3 pl-10 pr-3 text-sm text-primary outline-none placeholder:text-disabled focus:border-indigo-500/50 transition"
+                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-disabled" />
+                <input className="w-full rounded-xl border border-subtle bg-card py-3 pl-10 pr-3 text-sm text-primary outline-none placeholder:text-disabled focus:border-primary transition"
                   placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} />
               </div>
             </div>
@@ -71,8 +71,8 @@ export default function AuthPage() {
           <div className="mb-4">
             <label className="text-xs font-medium uppercase tracking-wider text-muted">Email Address</label>
             <div className="relative mt-1.5">
-              <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-              <input className="w-full rounded-xl border border-subtle bg-input py-3 pl-10 pr-3 text-sm text-primary outline-none placeholder:text-disabled focus:border-indigo-500/50 transition"
+              <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-disabled" />
+              <input className="w-full rounded-xl border border-subtle bg-card py-3 pl-10 pr-3 text-sm text-primary outline-none placeholder:text-disabled focus:border-primary transition"
                 placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
           </div>
@@ -80,21 +80,21 @@ export default function AuthPage() {
           <div className="mb-4">
             <label className="text-xs font-medium uppercase tracking-wider text-muted">Password</label>
             <div className="relative mt-1.5">
-              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-              <input className="w-full rounded-xl border border-subtle bg-input py-3 pl-10 pr-10 text-sm text-primary outline-none placeholder:text-disabled focus:border-indigo-500/50 transition"
+              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-disabled" />
+              <input className="w-full rounded-xl border border-subtle bg-card py-3 pl-10 pr-10 text-sm text-primary outline-none placeholder:text-disabled focus:border-primary transition"
                 type={showPw ? "text" : "password"} placeholder={mode === "signup" ? "Minimum 8 characters" : "Enter your password"}
                 value={password} onChange={(e) => setPassword(e.target.value)} />
-              <button type="button" onClick={() => setShowPw((v) => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-secondary transition">
+              <button type="button" onClick={() => setShowPw((v) => !v)} className="absolute right-3 top-1/2 -translate-y-1/2 text-disabled hover:text-secondary transition">
                 {showPw ? <FiEyeOff /> : <FiEye />}
               </button>
             </div>
           </div>
 
-          {error && <div className="mb-4 rounded-xl border border-red-500/20 bg-red-500/10 p-3 text-sm text-red-400">{error}</div>}
-          {info && <div className="mb-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-sm text-emerald-400">{info}</div>}
+          {error && <div className="mb-4 rounded-xl border border-danger bg-danger p-3 text-sm text-danger">{error}</div>}
+          {info && <div className="mb-4 rounded-xl border border-sage bg-sage p-3 text-sm text-sage">{info}</div>}
 
           <button type="submit" disabled={loading || !email || !password || (mode === "signup" && !name)}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-40"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-btn py-3 text-sm font-semibold text-btn hover:bg-btn-hover transition disabled:opacity-40"
           >
             {loading ? (
               <span className="flex items-center gap-2"><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" /> {mode === "signup" ? "Creating account..." : "Signing in..."}</span>
@@ -109,7 +109,7 @@ export default function AuthPage() {
               await api.post("/auth/forgot-password", { email });
               setInfo("If this email exists, reset instructions are sent.");
             }}
-              className="mt-3 w-full text-center text-xs text-muted hover:text-secondary transition"
+              className="mt-3 w-full text-center text-xs text-disabled hover:text-secondary transition"
             >
               Forgot password?
             </button>
@@ -117,7 +117,7 @@ export default function AuthPage() {
 
           <p className="mt-6 text-center text-sm text-muted">
             {mode === "signup" ? "Already have an account?" : "Need an account?"}{" "}
-            <Link to={mode === "signup" ? "/login" : "/signup"} className="font-medium text-indigo-400 hover:text-indigo-300 transition underline underline-offset-2">
+            <Link to={mode === "signup" ? "/login" : "/signup"} className="font-medium text-primary hover:text-secondary transition underline underline-offset-2">
               {mode === "signup" ? "Sign in" : "Sign up"}
             </Link>
           </p>

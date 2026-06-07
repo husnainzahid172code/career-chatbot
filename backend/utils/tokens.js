@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 
-const ACCESS_SECRET = process.env.JWT_SECRET || "dev_secret";
-const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || "dev_refresh_secret";
+if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET environment variable is not set");
+if (!process.env.JWT_REFRESH_SECRET) throw new Error("JWT_REFRESH_SECRET environment variable is not set");
+const ACCESS_SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 export function signAccessToken(user) {
   return jwt.sign(

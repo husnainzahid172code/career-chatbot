@@ -1,5 +1,3 @@
-import { api } from "../api/client";
-
 export type GeminiResponse = {
   text: string;
   chatId?: string;
@@ -19,8 +17,18 @@ function getFallbackResponse(prompt: string): string {
 
 export async function askBackend(prompt: string, context = ""): Promise<GeminiResponse> {
   try {
-    const { data } = await api.post("/ai/chat", { prompt, context });
-    return data;
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
+    const res = await fetch(`${baseUrl}/ai/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt, context }),
+    });
+    if (!res.ok) {
+      let detail = "";
+      try { const err = await res.json(); detail = err.detail || err.error || ""; } catch {}
+      return { text: detail || `The AI service returned an error (${res.status}). Please try again later.` };
+    }
+    return await res.json();
   } catch {
     return { text: getFallbackResponse(prompt) };
   }

@@ -96,15 +96,15 @@ export default function ChatPage() {
   return (
     <div className="flex h-[calc(100dvh-4rem)] flex-col">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="text-2xl font-bold">AI Career Chat</h2>
+        <h2 className="text-2xl font-bold text-primary">AI Career Chat</h2>
         <div className="flex gap-2">
           {messages.length > 1 && (
-            <button onClick={clearChat} className="flex items-center gap-1.5 rounded-lg border border-subtle px-3 py-1.5 text-xs text-secondary hover:bg-card hover:text-primary transition">
+            <button onClick={clearChat} className="flex items-center gap-1.5 rounded-lg border border-subtle px-3 py-1.5 text-xs text-muted hover:bg-elevated hover:text-primary transition">
               <FiTrash2 className="text-xs" /> Clear
             </button>
           )}
           {messages.length > 1 && (
-            <button onClick={regenerate} disabled={isStreaming} className="flex items-center gap-1.5 rounded-lg border border-subtle px-3 py-1.5 text-xs text-secondary hover:bg-card hover:text-primary transition disabled:opacity-40">
+            <button onClick={regenerate} disabled={isStreaming} className="flex items-center gap-1.5 rounded-lg border border-subtle px-3 py-1.5 text-xs text-muted hover:bg-elevated hover:text-primary transition disabled:opacity-40">
               <FiRotateCcw className="text-xs" /> Regenerate
             </button>
           )}
@@ -113,7 +113,7 @@ export default function ChatPage() {
 
       <div
         ref={wrapRef}
-        className="flex-1 space-y-4 overflow-auto rounded-2xl border border-subtle bg-card p-4 transition-colors duration-300"
+        className="flex-1 space-y-4 overflow-auto rounded-2xl border border-default bg-card p-4"
         onScroll={(e) => {
           const el = e.currentTarget;
           setAutoScroll(el.scrollHeight - el.scrollTop - el.clientHeight < 100);
@@ -123,8 +123,8 @@ export default function ChatPage() {
           <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
             <div className={`group relative max-w-[80%] rounded-2xl p-4 ${
               m.role === "user"
-                ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white"
-                : "border border-subtle bg-input"
+                ? "bg-btn text-btn"
+                : "border border-subtle bg-elevated"
             }`}>
               {m.role === "assistant" ? (
                 <MarkdownMessage content={m.content} />
@@ -135,13 +135,13 @@ export default function ChatPage() {
                 <div className="mt-2 flex items-center gap-2 border-t border-subtle pt-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={() => copyContent(m.content, m.id)}
-                    className="flex items-center gap-1 rounded bg-elevated px-2 py-1 text-xs text-secondary hover:text-primary transition"
+                    className="flex items-center gap-1 rounded bg-elevated px-2 py-1 text-xs text-muted hover:text-primary transition"
                   >
-                    {copiedId === m.id ? <FiCheck className="text-green-400" /> : <FiCopy />}
+                    {copiedId === m.id ? <FiCheck className="text-sage" /> : <FiCopy />}
                     {copiedId === m.id ? "Copied" : "Copy"}
                   </button>
                   {m.id !== "welcome" && (
-                    <button onClick={() => deleteMessage(m.id)} className="rounded bg-elevated px-2 py-1 text-xs text-secondary hover:text-red-400 transition">
+                    <button onClick={() => deleteMessage(m.id)} className="rounded bg-elevated px-2 py-1 text-xs text-muted hover:text-danger transition">
                       <FiTrash2 />
                     </button>
                   )}
@@ -151,11 +151,11 @@ export default function ChatPage() {
           </div>
         ))}
         {isStreaming && (
-          <div className="flex items-center gap-2 text-sm text-secondary">
+          <div className="flex items-center gap-2 text-sm text-muted">
             <div className="flex gap-1">
-              <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "0ms" }} />
-              <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "150ms" }} />
-              <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "300ms" }} />
+              <span className="h-2 w-2 animate-bounce rounded-full bg-disabled" style={{ animationDelay: "0ms" }} />
+              <span className="h-2 w-2 animate-bounce rounded-full bg-disabled" style={{ animationDelay: "150ms" }} />
+              <span className="h-2 w-2 animate-bounce rounded-full bg-disabled" style={{ animationDelay: "300ms" }} />
             </div>
             <span>CareerPilot is thinking...</span>
           </div>
@@ -165,7 +165,7 @@ export default function ChatPage() {
       <div className="mt-3 flex gap-2">
         <div className="relative flex-1">
           <input
-            className="w-full rounded-xl border border-subtle bg-input p-3 pr-12 text-sm text-primary placeholder:text-disabled outline-none focus:border-indigo-500/50 transition"
+            className="w-full rounded-xl border border-default bg-card p-3 pr-12 text-sm text-primary placeholder:text-disabled outline-none focus:border-primary transition"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(prompt); } }}
@@ -173,7 +173,7 @@ export default function ChatPage() {
             disabled={isStreaming}
           />
           {isStreaming && (
-            <button onClick={stop} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-red-500/20 px-2.5 py-1 text-xs text-red-400 hover:bg-red-500/30 transition">
+            <button onClick={stop} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-danger px-2.5 py-1 text-xs text-danger hover:bg-danger/80 transition">
               Stop
             </button>
           )}
@@ -181,7 +181,7 @@ export default function ChatPage() {
         <button
           onClick={() => sendMessage(prompt)}
           disabled={!prompt.trim() || isStreaming}
-          className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-5 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-40"
+          className="flex items-center gap-2 rounded-xl bg-btn px-5 py-3 text-sm font-semibold text-btn hover:bg-btn-hover transition disabled:opacity-40"
         >
           <FiSend /> Send
         </button>
